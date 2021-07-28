@@ -1,0 +1,9 @@
+server:
+  port: 11002
+
+spring:
+  cloud:
+    nacos:
+      discovery:
+        service: stock-serv
+      server-addr: 172.16.1.48:8848
