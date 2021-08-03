@@ -2,25 +2,30 @@ package com.muke;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
-import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.web.client.RestTemplate;
 
 /**
- * @ClassName: ProductApplication
+ * @ClassName: SkillApplication
  * @Author: zjw
  * @Description: TODO
- * @Date: 2021/07/27 14:17
+ * @Date: 2021/07/31 11:38
  * @Version: 1.0
  */
 @SpringBootApplication
-@EnableScheduling
-public class ProductApplication {
+@EnableDiscoveryClient
+@EnableAsync
+public class SkillApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ProductApplication.class,args);
+        SpringApplication.run(SkillApplication.class,args);
     }
+
 
 
     @Bean
@@ -33,4 +38,9 @@ public class ProductApplication {
         return template;
     }
 
+    @Bean
+    @LoadBalanced
+    public RestTemplate create() {
+        return new RestTemplate();
+    }
 }

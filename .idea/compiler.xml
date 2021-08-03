@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="ShopCart-serv" />
         <module name="Order-serv" />
+        <module name="Skill-serv" />
         <module name="User-serv" />
         <module name="Stock-serv" />
         <module name="Product-serv" />
@@ -20,6 +21,7 @@
       <module name="Order-serv" options="-parameters" />
       <module name="Product-serv" options="-parameters" />
       <module name="ShopCart-serv" options="-parameters" />
+      <module name="Skill-serv" options="-parameters" />
       <module name="Stock-serv" options="-parameters" />
       <module name="User-serv" options="-parameters" />
     </option>

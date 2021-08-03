@@ -1,0 +1,26 @@
+server:
+  port: 13000
+spring:
+  cloud:
+    nacos:
+      discovery:
+        service: skill-serv
+      server-addr: 172.16.1.48:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8060
+  datasource:
+    url: jdbc:mysql://172.16.1.47:3306/skill?autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: highrock
+    password: Tianshi@18
+  redis:
+    host: 172.16.1.48
+    port: 6379
+  jpa:
+    show-sql: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

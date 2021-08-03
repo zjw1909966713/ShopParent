@@ -1,5 +1,8 @@
 package com.muke.controller;
 
+import com.muke.dao.OrderRepository;
+import com.muke.entity.Order;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,7 +21,12 @@ public class OrderController {
     @Autowired
     private RestTemplate restTemplate;
 
+
+    @Autowired
+    private OrderRepository orderRepository;
+
     @GetMapping("/order/create")
+    @GlobalTransactional
     public String createOrder(Integer productId,Integer userId){
 
         /*
@@ -30,8 +38,18 @@ public class OrderController {
         return "用户:"+userName+",购买商品"+productName+","+result+","+shopresult;
          */
 
+        Order order=new Order();
+        order.setProductId(productId);
+        order.setUserId(userId);
+        orderRepository.save(order);
+
+
+
         String result = restTemplate.getForObject("http://stock-serv/stock/reduce/" + productId, String.class);
 
+        if (!result.equals("success")){
+            throw new RuntimeException();
+        }
 
         return result;
     }

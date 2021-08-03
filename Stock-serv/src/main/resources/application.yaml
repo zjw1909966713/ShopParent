@@ -1,0 +1,39 @@
+server:
+  port: 11000
+
+spring:
+  cloud:
+    nacos:
+      discovery:
+        service: stock-serv
+        group: SEATA_GROUP
+      server-addr: 172.16.1.48:8848
+  datasource:
+    url: jdbc:mysql://172.16.1.47:3306/stockdb?autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: highrock
+    password: Tianshi@18
+  jpa:
+    show-sql: true
+  application:
+    name: stock-serv
+
+seata:
+  enabled: true
+  tx-service-group: order-service
+  config:
+    type: nacos
+    nacos:
+      namespace: public
+      server-addr: 172.16.1.48
+      group: SEATA_GROUP
+      username: "nacos"
+      password: "nacos"
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      server-addr: 172.16.1.48:8848
+      group: SEATA_GROUP
+      username: "nacos"
+      password: "nacos"
+
